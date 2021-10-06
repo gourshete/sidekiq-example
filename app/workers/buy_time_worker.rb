@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
+# The worker
 class BuyTimeWorker
   include Sidekiq::Worker
 
   def perform(name, sec)
-    p "Hey #{name}, going to sleep for #{sec}."
-    sleep(sec*1000)
-    p "I was quite long nap."
+    # Below is the expensive processing that needs to be off-loaded to a job worker.
+    p "Hey #{name}, going to sleep for #{sec} secs."
+    sleep(sec)
+    p 'It was quite a long nap.'
   end
-
 end
